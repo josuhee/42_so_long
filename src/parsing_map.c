@@ -6,24 +6,24 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:55:06 by sujo              #+#    #+#             */
-/*   Updated: 2021/07/08 13:47:14 by sujo             ###   ########.fr       */
+/*   Updated: 2021/07/09 13:41:03 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "so_long.h"
 
-static void		map_error(void)
+static void	map_error(void)
 {
 	write(1, "Error\n", 6);
 	exit(1);
 }
 
-static int		check_map(char *filename, t_map *map)
+static int	check_map(char *filename, t_map *map)
 {
+	char	*line;
 	int		fd;
 	int		size;
-	char	*line;
 	int		height;
 
 	fd = open(filename, O_RDONLY);
@@ -47,7 +47,7 @@ static int		check_map(char *filename, t_map *map)
 	return (size);
 }
 
-static char		*ft_strjoin(char const *s1, char const *s2)
+static char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*result;
 	char	*ptr;
@@ -69,7 +69,7 @@ static char		*ft_strjoin(char const *s1, char const *s2)
 	return (result);
 }
 
-void			parsing_map(t_map *map, char *filename)
+void	parsing_map(t_map *map, char *filename)
 {
 	char	*line;
 	char	*path;

@@ -6,7 +6,7 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 15:53:49 by sujo              #+#    #+#             */
-/*   Updated: 2021/07/09 12:18:17 by sujo             ###   ########.fr       */
+/*   Updated: 2021/07/09 13:46:31 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 void	init_arr(t_map *map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	map->dfs.arr = (int **)malloc(sizeof(int *) * map->height);
 	map->dfs.visit = (int **)malloc(sizeof(int *) * map->height);
 	if (!map->dfs.arr || !map->dfs.visit)
 		exit(1);
-	i = 0;
-	while (i < map->height)
+	i = -1;
+	while (++i < map->height)
 	{
-		j = 0;
+		j = -1;
 		map->dfs.arr[i] = (int *)malloc(sizeof(int) * map->width);
 		map->dfs.visit[i] = (int *)malloc(sizeof(int) * map->width);
-		while (j < map->width)
+		while (++j < map->width)
 		{
 			if (!map->dfs.arr[i] || !map->dfs.visit[i])
 				exit(1);
@@ -36,9 +36,7 @@ void	init_arr(t_map *map)
 			else
 				map->dfs.arr[i][j] = -1;
 			map->dfs.visit[i][j] = 0;
-			j++;
 		}
-		i++;
 	}
 }
 
@@ -46,53 +44,56 @@ void	dfs(int x, int y, int cnt, t_map *map)
 {
 	map->dfs.visit[x][y] = 1;
 	map->dfs.arr[x][y] = cnt;
-
 	if (map->junmkang_x == x && map->junmkang_y == y)
 		return ;
 	if (x - 1 >= 0)
-		if ((map->dfs.visit[x-1][y] && map->dfs.arr[x-1][y] > cnt + 1) || (!map->dfs.visit[x-1][y] && map->dfs.arr[x - 1][y] == 0))
+		if ((map->dfs.visit[x - 1][y] && map->dfs.arr[x - 1][y] > cnt + 1) \
+			|| (!map->dfs.visit[x - 1][y] && map->dfs.arr[x - 1][y] == 0))
 			dfs(x - 1, y, cnt + 1, map);
 	if (x + 1 < map->height)
-		if ((map->dfs.visit[x+1][y] && map->dfs.arr[x+1][y] > cnt + 1) || (!map->dfs.visit[x+1][y] && map->dfs.arr[x + 1][y] == 0))
+		if ((map->dfs.visit[x + 1][y] && map->dfs.arr[x + 1][y] > cnt + 1) \
+			|| (!map->dfs.visit[x + 1][y] && map->dfs.arr[x + 1][y] == 0))
 			dfs(x + 1, y, cnt + 1, map);
 	if (y - 1 >= 0)
-		if ((map->dfs.visit[x][y - 1] && map->dfs.arr[x][y-1] > cnt + 1) || (!map->dfs.visit[x][y-1] && map->dfs.arr[x][y-1] == 0))
+		if ((map->dfs.visit[x][y - 1] && map->dfs.arr[x][y - 1] > cnt + 1) \
+			|| (!map->dfs.visit[x][y - 1] && map->dfs.arr[x][y - 1] == 0))
 			dfs(x, y - 1, cnt + 1, map);
 	if (y + 1 < map->width)
-		if ((map->dfs.visit[x][y + 1] && map->dfs.arr[x][y+1] > cnt + 1) || (!map->dfs.visit[x][y+1] && map->dfs.arr[x][y+1] == 0))
+		if ((map->dfs.visit[x][y + 1] && map->dfs.arr[x][y + 1] > cnt + 1) \
+			|| (!map->dfs.visit[x][y + 1] && map->dfs.arr[x][y + 1] == 0))
 			dfs(x, y + 1, cnt + 1, map);
 	return ;
 }
 
-void		min(t_map *map)
+void	min(t_map *map)
 {
-	int x;
-	int y;
-	int min;
+	int	x;
+	int	y;
+	int	min;
 
 	map->min_x = map->junmkang_x;
 	map->min_y = map->junmkang_y;
 	x = map->junmkang_x;
 	y = map->junmkang_y;
-	if (x - 1 >= 0 && map->dfs.visit[x-1][y])
+	if (x - 1 >= 0 && map->dfs.visit[x - 1][y])
 	{
-		min = map->dfs.arr[x-1][y];
+		min = map->dfs.arr[x - 1][y];
 		map->min_x = x - 1;
 		map->min_y = y;
 	}
-	if (x + 1 <= map->height && min > map->dfs.arr[x+1][y] && map->dfs.visit[x+1][y])
+	if (x + 1 <= map->height && min > map->dfs.arr[x + 1][y] && map->dfs.visit[x + 1][y])
 	{
-		min = map->dfs.arr[x+1][y];
+		min = map->dfs.arr[x + 1][y];
 		map->min_x = x + 1;
 		map->min_y = y;
 	}
-	if (y - 1 >= 0 && min > map->dfs.arr[x][y - 1]&& map->dfs.visit[x][y-1])
+	if (y - 1 >= 0 && min > map->dfs.arr[x][y - 1] && map->dfs.visit[x][y - 1])
 	{
 		min = map->dfs.arr[x][y - 1];
 		map->min_x = x;
 		map->min_y = y - 1;
 	}
-	if (y + 1 < map->width && min > map->dfs.arr[x][y + 1]&& map->dfs.visit[x][y+1])
+	if (y + 1 < map->width && min > map->dfs.arr[x][y + 1] && map->dfs.visit[x][y + 1])
 	{
 		min = map->dfs.arr[x][y + 1];
 		map->min_x = x;
@@ -106,9 +107,9 @@ void		min(t_map *map)
 		exit(0);
 }
 
-void		search_player(t_map *map)
+void	search_player(t_map *map)
 {
-	int ret;
+	int	ret;
 
 	init_arr(map);
 	dfs(map->x, map->y, 0, map);

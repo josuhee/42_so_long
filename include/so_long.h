@@ -6,7 +6,7 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 15:46:37 by sujo              #+#    #+#             */
-/*   Updated: 2021/07/09 12:22:46 by sujo             ###   ########.fr       */
+/*   Updated: 2021/07/09 13:36:07 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,12 @@ typedef struct s_check
 	int	exit;
 	int	collect;
 }				t_check;
+
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}				t_point;
 
 /*
 * Key Event
