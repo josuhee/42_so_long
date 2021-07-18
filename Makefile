@@ -6,7 +6,7 @@
 #    By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/30 16:33:42 by sujo              #+#    #+#              #
-#    Updated: 2021/07/06 20:07:59 by sujo             ###   ########.fr        #
+#    Updated: 2021/07/18 21:27:21 by sujo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,24 @@ SRCS=src/main.c\
 	src/valid_map.c\
 	src/key_event.c\
 	src/ft_itoa.c\
-	src/search_player.c
+
+SRCB=bonus/main_bonus.c\
+	bonus/so_long_bonus.c\
+	bonus/parsing_map_bonus.c\
+	bonus/get_next_line_bonus.c\
+	bonus/get_next_line_utils_bonus.c\
+	bonus/paint_map_bonus.c\
+	bonus/valid_map_bonus.c\
+	bonus/key_event_bonus.c\
+	bonus/ft_itoa_bonus.c\
+	bonus/search_player_bonus.c\
+	bonus/search_player_utils_bonus.c
 
 OBJS		=$(SRCS:.c=.o)
 OBJB		=$(SRCB:.c=.o)
 NAME		=so_long
 HEADER		=-I include/
-CFLAG		= -fsanitize=address
+CFLAG		=-Wall -Wextra -Werror
 MINI_DIR	=mlx_opengl/
 MINI_NAME	=libmlx.a
 LIBS		=-Lmlx_opengl -lmlx -framework OpenGL -framework Appkit
@@ -41,14 +52,13 @@ NO_COLOR	=\e[0m
 
 ifdef WITH_BONUS
 	OBJ_FILES = $(OBJB)
-	NAME=checker
 else
 	OBJ_FILES = $(OBJS)
 endif
 
 ifdef WITH_BONUS
 %.o: %.c
-	$(CC) $(CFLAG) -c -o $@ $< $(HEADERB)
+	$(CC) $(CFLAG) -c -o $@ $< $(HEADER)
 else
 %.o: %.c
 	@$(CC) $(CFLAG) -c -o $@ $< $(HEADER)

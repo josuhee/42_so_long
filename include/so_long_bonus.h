@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 15:46:37 by sujo              #+#    #+#             */
-/*   Updated: 2021/07/18 21:42:10 by sujo             ###   ########.fr       */
+/*   Updated: 2021/07/09 17:44:42 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include "../mlx_opengl/mlx.h"
-# include "get_next_line.h"
 # include <stdlib.h>
+# include <time.h>
 # include <stdio.h>
 # include <unistd.h>
+# include "get_next_line.h"
 
 typedef struct s_back
 {
@@ -101,9 +102,12 @@ void	so_long(char *filename);
 void	parsing_map(t_map *map, char *filename);
 void	valid_map(t_map *map);
 void	paint_map(t_mlx *mlx, t_map *map, t_img *img, char *player);
+void	key_event(t_mlx *mlx, t_map *map);
+char	*ft_itoa(int n);
 void	search_player(t_map *map);
+void	init_arr(t_map *map);
+void	dfs(int x, int y, int cnt, t_map *map);
+void	set_dfs_arg(t_map *map, int *min, int x, int y);
 void	game_over(void);
-int		key_press(int keycode, t_map *map);
-char	*ft_itoa(int num);
 
 #endif

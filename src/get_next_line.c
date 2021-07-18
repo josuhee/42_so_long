@@ -6,11 +6,11 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 17:50:55 by sujo              #+#    #+#             */
-/*   Updated: 2021/07/09 12:35:13 by sujo             ###   ########.fr       */
+/*   Updated: 2021/07/09 17:34:47 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "so_long.h"
 
 int	check_enter(char *s)
 {

@@ -6,39 +6,11 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 17:27:17 by sujo              #+#    #+#             */
-/*   Updated: 2021/07/09 12:33:02 by sujo             ###   ########.fr       */
+/*   Updated: 2021/07/18 21:28:54 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-static int	ft_strlen(const char *s)
-{
-	int	idx;
-
-	idx = 0;
-	while (s[idx])
-		idx++;
-	return (idx);
-}
-
-static char	*ft_strdup(const char *s)
-{
-	char	*result;
-	size_t	idx;
-
-	idx = 0;
-	result = (char *)malloc(ft_strlen(s) + 1);
-	if (!result)
-		return (0);
-	while (s[idx] != '\0')
-	{
-		result[idx] = s[idx];
-		idx++;
-	}
-	result[idx] = '\0';
-	return (result);
-}
 
 int	num_size(int n)
 {

@@ -6,7 +6,7 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 21:13:48 by sujo              #+#    #+#             */
-/*   Updated: 2021/07/09 13:39:08 by sujo             ###   ########.fr       */
+/*   Updated: 2021/07/14 14:25:09 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,11 @@ void	print_img(t_mlx *mlx, char *filename, int x, int y)
 	img = mlx_xpm_file_to_image(mlx->mlx_ptr, filename, &w, &h);
 	if (h == 0 || w == 0)
 	{
+		write(1, "Error\n", 6);
 		perror("img");
 		exit(1);
 	}
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win, img, x, y);
-}
-
-static void	put_string_mlx(t_map *map, t_mlx *mlx)
-{
-	char	*cnt;
-	int		x;
-	int		y;
-
-	x = map->y * 72;
-	y = map->x * 72;
-	cnt = ft_itoa(map->cnt);
-	mlx_string_put(mlx->mlx_ptr, mlx->win, x, y, 0x3162C7, cnt);
-	free(cnt);
 }
 
 static void	set_img(t_mlx *mlx, t_img *img, t_point p, char ch)
@@ -78,7 +66,6 @@ static void	set_img(t_mlx *mlx, t_img *img, t_point p, char ch)
 
 void	paint_map(t_mlx *mlx, t_map *map, t_img *img, char *player)
 {
-	char	*cnt;
 	int		i;
 	int		j;
 
@@ -101,5 +88,4 @@ void	paint_map(t_mlx *mlx, t_map *map, t_img *img, char *player)
 				print_img(mlx, player, j * 72, i * 72);
 		}
 	}
-	put_string_mlx(map, mlx);
 }

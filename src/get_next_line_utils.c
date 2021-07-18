@@ -6,11 +6,11 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 18:41:47 by sujo              #+#    #+#             */
-/*   Updated: 2021/07/09 12:33:23 by sujo             ###   ########.fr       */
+/*   Updated: 2021/07/09 17:34:57 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "so_long.h"
 
 size_t	ft_strlen(const char *s)
 {

@@ -6,28 +6,39 @@
 /*   By: sujo <sujo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 19:55:06 by sujo              #+#    #+#             */
-/*   Updated: 2021/07/09 13:41:03 by sujo             ###   ########.fr       */
+/*   Updated: 2021/07/14 14:28:41 by sujo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
 #include "so_long.h"
 
 static void	map_error(void)
 {
-	write(1, "Error\n", 6);
+	write(1, "Error\nInvalid Map\n", 18);
 	exit(1);
+}
+
+static int	ft_strcmp(char *s1, char *s2)
+{
+	while (*s1 && *s2)
+	{
+		if (*s1 != *s2)
+			return (*s1 - *s2);
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
 }
 
 static int	check_map(char *filename, t_map *map)
 {
 	char	*line;
 	int		fd;
-	int		size;
+	size_t	size;
 	int		height;
 
 	fd = open(filename, O_RDONLY);
-	if (fd < 0)
+	if (fd < 0 || ft_strcmp(".ber", &filename[ft_strlen(filename) - 4]))
 		map_error();
 	size = 0;
 	height = 0;
@@ -86,14 +97,12 @@ void	parsing_map(t_map *map, char *filename)
 	while (get_next_line(fd, &line) > 0)
 		map->map[++i] = line;
 	map->height = ++i;
-	if (ft_strlen(line) != 0)
-	{
+	if (ft_strlen(line) != 0 && ++map->height)
 		map->map[i] = line;
-		map->height += 1;
-	}
 	else
 		free(line);
 	map->cnt = 0;
 	map->collect = 0;
+	free(path);
 	valid_map(map);
 }
